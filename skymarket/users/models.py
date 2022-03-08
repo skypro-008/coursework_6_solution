@@ -1,27 +1,25 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractBaseUser, AbstractUser
 from django.db import models
+from users.managers import UserManager
 from phonenumber_field.modelfields import PhoneNumberField
-from users.managers import CustomUserManager
-from django.utils.translation import gettext_lazy as _
 
 
 class UserRoles:
-    USER = 'user'
-    MODERATOR = 'moderator'
-    ADMIN = 'admin'
+    USER = "user"
+    ADMIN = "admin"
     choices = (
         (USER, USER),
-        (MODERATOR, MODERATOR),
         (ADMIN, ADMIN),
     )
 
 
-class User(AbstractUser):
-    username = models.CharField(
-        max_length=64,
-        blank=True,
-        null=True,
-    )
+class User(AbstractBaseUser):
+
+    objects = UserManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone']
+
     first_name = models.CharField(
         max_length=64,
         verbose_name="Имя",
@@ -35,15 +33,15 @@ class User(AbstractUser):
     )
 
     email = models.EmailField(
-        'email address',
+        "email address",
         unique=True,
         help_text="Укажите электронную почту",
-
     )
 
     phone = PhoneNumberField(
         verbose_name="Телефон для связи",
         help_text="Укажите телефон для связи",
+
     )
 
     role = models.CharField(
@@ -60,12 +58,6 @@ class User(AbstractUser):
         verbose_name="Аватар",
         help_text="Загрузите аватар",
     )
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone']
-    objects = CustomUserManager()
-
-    class Meta:
-        ordering = ['id']
 
     def __str__(self):
         return self.email
@@ -83,5 +75,6 @@ class User(AbstractUser):
         return self.role == UserRoles.USER
 
     class Meta:
-        verbose_name = _("Пользователь")
-        verbose_name_plural = _("Пользователи")
+        verbose_name = "Пользователь"
+        verbose_name_plural = "Пользователи"
+        ordering = ["id"]

@@ -1,0 +1,58 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "email": "test@skypro.ru",
+      "password":"pbkdf2_sha256$260000$3bo3p1RBL9USUYt4njQGst$VABz0+ssAtcd6WS4s8Uf55iOlu0vLcyb9mAOPwfc9nU=",
+      "last_login": "2022-02-20 13:34:16.332479+03:00",
+      "phone": "+79217777777",
+      "role": "user",
+      "first_name":"Иван",
+      "last_name": "Иванов",
+      "image": null
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "email": "test2@skypro.ru",
+      "password": "pbkdf2_sha256$260000$3bo3p1RBL9USUYt4njQGst$VABz0+ssAtcd6WS4s8Uf55iOlu0vLcyb9mAOPwfc9nU=",
+      "last_login": "2022-02-20 13:34:16.332479+03:00",
+      "phone": "+79217777777",
+      "role": "user",
+      "first_name":"Петр",
+      "last_name": "Петров",
+      "image": null
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "email": "test3@skypro.ru",
+      "password": "pbkdf2_sha256$260000$3bo3p1RBL9USUYt4njQGst$VABz0+ssAtcd6WS4s8Uf55iOlu0vLcyb9mAOPwfc9nU=",
+      "last_login": "2022-02-20 13:34:16.332479+03:00",
+      "phone": "+79217777777",
+      "role": "admin",
+      "first_name": "Админ",
+      "last_name": "Петров",
+      "image": null
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 4,
+    "fields": {
+      "email": "moderator@skypro.ru",
+      "password":"pbkdf2_sha256$260000$3bo3p1RBL9USUYt4njQGst$VABz0+ssAtcd6WS4s8Uf55iOlu0vLcyb9mAOPwfc9nU=",
+      "last_login": "2022-02-20 13:34:16.332479+03:00",
+      "phone": "+79217777777",
+      "role": "moderator",
+      "first_name":"Модерато",
+      "last_name": "Сидоров",
+      "image": null
+    }
+  }
+]
