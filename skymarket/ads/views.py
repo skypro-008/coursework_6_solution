@@ -7,6 +7,7 @@ from ads.permissions import IsOwner, IsAdmin
 from ads.serializers import AdDetailSerializer, AdSerializer, CommentSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from ads.filters import AdFilter
+from rest_framework.decorators import action
 
 
 class AdPagination(pagination.PageNumberPagination):
@@ -25,6 +26,21 @@ class AdViewSet(viewsets.ModelViewSet):
         if self.action == "retrieve":
             return AdDetailSerializer
         return AdSerializer
+
+    def get_queryset(self):
+        if self.action == "me":
+            return Ad.objects.filter(author=self.request.user).all()
+        return Ad.objects.all()
+
+
+    @action(
+        detail=False,
+        methods=[
+            "get",
+        ],
+    )
+    def me(self, request, *args, **kwargs):
+        return super().list(self, request, *args, **kwargs)
 
 
 class CommentViewSet(viewsets.ModelViewSet):
