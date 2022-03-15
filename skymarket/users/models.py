@@ -52,13 +52,6 @@ class User(AbstractBaseUser):
         help_text="Выберите роль пользователя",
     )
 
-    image = models.ImageField(
-        upload_to="profile",
-        null=True,
-        verbose_name="Аватар",
-        help_text="Загрузите аватар",
-    )
-
     def __str__(self):
         return self.email
 

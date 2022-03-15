@@ -6,6 +6,7 @@ from rest_framework_simplejwt.views import (TokenObtainPairView,
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("documentation.urls")),
+    path("redoc-tasks/", include("redoc.urls")),
     path("", include("users.urls")),
     path("", include("ads.urls")),
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),

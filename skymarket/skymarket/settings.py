@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_filters',
     "users",
     "ads",
+    "redoc",
 ]
 
 AUTH_USER_MODEL = "users.User"

@@ -9,8 +9,7 @@
       "phone": "+79217777777",
       "role": "user",
       "first_name":"Иван",
-      "last_name": "Иванов",
-      "image": null
+      "last_name": "Иванов"
     }
   },
   {
@@ -23,8 +22,7 @@
       "phone": "+79218888888",
       "role": "user",
       "first_name":"Петр",
-      "last_name": "Петров",
-      "image": null
+      "last_name": "Петров"
     }
   },
     {
@@ -37,8 +35,7 @@
       "phone": "+7999999999",
       "role": "user",
       "first_name":"Петр",
-      "last_name": "Петров",
-      "image": null
+      "last_name": "Петров"
     }
   },
     {
@@ -51,8 +48,7 @@
       "phone": "+79217777777",
       "role": "user",
       "first_name":"Петр",
-      "last_name": "Петров",
-      "image": null
+      "last_name": "Петров"
     }
   },
   {
@@ -65,8 +61,7 @@
       "phone": "+79217777777",
       "role": "admin",
       "first_name": "Админ",
-      "last_name": "Петров",
-      "image": null
+      "last_name": "Петров"
     }
   }
 ]
