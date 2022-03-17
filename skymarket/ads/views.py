@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import pagination, viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 
 from ads.models import Ad, Comment
 from ads.permissions import IsOwner, IsAdmin
@@ -11,21 +11,32 @@ from rest_framework.decorators import action
 
 
 class AdPagination(pagination.PageNumberPagination):
-    page_size = 3
+    page_size = 4
 
 
 class AdViewSet(viewsets.ModelViewSet):
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
     pagination_class = AdPagination
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwner, IsAdmin]
+    permission_classes = [IsAuthenticated]
     filter_backends = (DjangoFilterBackend,)
     filterset_class = AdFilter
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        serializer.save(author=user)
 
     def get_serializer_class(self):
         if self.action == "retrieve":
             return AdDetailSerializer
         return AdSerializer
+
+    def get_permissions(self):
+        if self.action in ["list", "retrieve"]:
+            permission_classes = (IsAuthenticated,)
+        elif self.action in ["create", "update", "partial_update", "destroy"]:
+            permission_classes = (IsOwner | IsAdmin,)
+        return tuple(permission() for permission in permission_classes)
 
     def get_queryset(self):
         if self.action == "me":
@@ -46,7 +57,7 @@ class AdViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwner, IsAdmin]
+    permission_classes = [IsAuthenticated, IsOwner, IsAdmin]
 
     def get_queryset(self):
         ad_id = self.kwargs.get("ad_pk")

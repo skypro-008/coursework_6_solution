@@ -223,7 +223,7 @@
           }
         },
         "tags":[
-          "Объявления"
+          "Отзывы"
         ]
       },
       "post":{
@@ -235,7 +235,7 @@
             "in":"body",
             "required":true,
             "schema":{
-              "$ref":"#/definitions/Comment"
+              "$ref":"#/definitions/CommentPost"
             }
           }
         ],
@@ -243,12 +243,12 @@
           "201":{
             "description":"",
             "schema":{
-              "$ref":"#/definitions/Comment"
+              "$ref":"#/definitions/CommentPost"
             }
           }
         },
         "tags":[
-          "Объявления"
+          "Отзывы"
         ]
       },
       "parameters":[
@@ -276,7 +276,7 @@
           }
         },
         "tags":[
-          "Объявления"
+          "Отзывы"
         ]
       },
       "patch":{
@@ -288,7 +288,7 @@
             "in":"body",
             "required":true,
             "schema":{
-              "$ref":"#/definitions/Comment"
+              "$ref":"#/definitions/CommentPost"
             }
           }
         ],
@@ -296,12 +296,12 @@
           "200":{
             "description":"",
             "schema":{
-              "$ref":"#/definitions/Comment"
+              "$ref":"#/definitions/CommentPost"
             }
           }
         },
         "tags":[
-          "Объявления"
+          "Отзывы"
         ]
       },
       "delete":{
@@ -316,7 +316,7 @@
           }
         },
         "tags":[
-          "Объявления"
+          "Отзывы"
         ]
       },
       "parameters":[
@@ -363,7 +363,7 @@
             "in":"body",
             "required":true,
             "schema":{
-              "$ref":"#/definitions/Ad"
+              "$ref":"#/definitions/AdPatch"
             }
           }
         ],
@@ -371,7 +371,7 @@
           "200":{
             "description":"",
             "schema":{
-              "$ref":"#/definitions/Ad"
+              "$ref":"#/definitions/AdPatch"
             }
           }
         },
@@ -548,44 +548,13 @@
         "operationId":"Мой профиль",
         "description":"",
         "parameters":[
-          {
-            "name":"page",
-            "in":"query",
-            "description":"A page number within the paginated result set.",
-            "required":false,
-            "type":"integer"
-          }
+
         ],
         "responses":{
           "200":{
             "description":"",
             "schema":{
-              "required":[
-                "count",
-                "results"
-              ],
-              "type":"object",
-              "properties":{
-                "count":{
-                  "type":"integer"
-                },
-                "next":{
-                  "type":"string",
-                  "format":"uri",
-                  "x-nullable":true
-                },
-                "previous":{
-                  "type":"string",
-                  "format":"uri",
-                  "x-nullable":true
-                },
-                "results":{
-                  "type":"array",
-                  "items":{
-                    "$ref":"#/definitions/User"
-                  }
-                }
-              }
+              "$ref":"#/definitions/User"
             }
           }
         },
@@ -594,7 +563,7 @@
         ]
       },
       "patch":{
-        "operationId":"Изменить мой профиль",
+        "operationId":"Изменить профиль",
         "description":"",
         "parameters":[
           {
@@ -602,7 +571,7 @@
             "in":"body",
             "required":true,
             "schema":{
-              "$ref":"#/definitions/User"
+              "$ref":"#/definitions/UserChange"
             }
           }
         ],
@@ -617,10 +586,7 @@
         "tags":[
           "Пользователь"
         ]
-      },
-      "parameters":[
-
-      ]
+      }
     },
     "/users/reset_password/":{
       "post":{
@@ -746,8 +712,7 @@
     "Ad":{
       "required":[
         "title",
-        "price",
-        "author"
+        "price"
       ],
       "type":"object",
       "properties":{
@@ -760,7 +725,6 @@
           "title":"\u0424\u043e\u0442\u043e",
           "description":"\u0420\u0430\u0437\u043c\u0435\u0441\u0442\u0438\u0442\u0435 \u0444\u043e\u0442\u043e \u0434\u043b\u044f \u043e\u0431\u044a\u044f\u0432\u043b\u0435\u043d\u0438\u044f",
           "type":"string",
-          "readOnly":true,
           "x-nullable":true,
           "format":"uri"
         },
@@ -778,17 +742,54 @@
           "maximum":2147483647,
           "minimum":0
         },
-        "author":{
-          "title":"\u0410\u0432\u0442\u043e\u0440 \u043e\u0431\u044a\u044f\u0432\u043b\u0435\u043d\u0438\u044f",
-          "description":"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0430\u0432\u0442\u043e\u0440\u0430 \u043e\u0431\u044a\u044f\u0432\u043b\u0435\u043d\u0438\u044f",
-          "type":"integer"
+        "description":{
+          "title":"Описание товара",
+          "description":"Введите описание товара",
+          "type":"string",
+          "maxLength": 1000
+        }
+      }
+    },
+    "AdPatch":{
+      "type":"object",
+      "properties":{
+        "pk":{
+          "title":"ID",
+          "type":"integer",
+          "readOnly":true
+        },
+        "image":{
+          "title":"\u0424\u043e\u0442\u043e",
+          "description":"\u0420\u0430\u0437\u043c\u0435\u0441\u0442\u0438\u0442\u0435 \u0444\u043e\u0442\u043e \u0434\u043b\u044f \u043e\u0431\u044a\u044f\u0432\u043b\u0435\u043d\u0438\u044f",
+          "type":"string",
+          "x-nullable":true,
+          "format":"uri"
+        },
+        "title":{
+          "title":"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430",
+          "description":"\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u043d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430",
+          "type":"string",
+          "maxLength":200,
+          "minLength":1
+        },
+        "price":{
+          "title":"\u0426\u0435\u043d\u0430 \u0442\u043e\u0432\u0430\u0440\u0430",
+          "description":"\u0414\u043e\u0431\u0430\u0432\u044c\u0442\u0435 \u0446\u0435\u043d\u0443 \u0442\u043e\u0432\u0430\u0440\u0430",
+          "type":"integer",
+          "maximum":2147483647,
+          "minimum":0
+        },
+        "description":{
+          "title":"Описание товара",
+          "description":"Введите описание товара",
+          "type":"string",
+          "maxLength": 1000
         }
       }
     },
     "Comment":{
       "required":[
-        "text",
-        "author"
+        "text"
       ],
       "type":"object",
       "properties":{
@@ -815,6 +816,26 @@
           "type":"string",
           "format":"date-time",
           "readOnly":true
+        }
+      }
+    },
+    "CommentPost": {
+      "required": [
+        "text"
+      ],
+      "type": "object",
+      "properties": {
+        "pk": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "text": {
+          "title": "\u041a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0439",
+          "description": "\u041e\u0441\u0442\u0430\u0432\u044c\u0442\u0435 \u0441\u0432\u043e\u0439 \u043a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0439 \u0437\u0434\u0435\u0441\u044c",
+          "type": "string",
+          "maxLength": 1000,
+          "minLength": 1
         }
       }
     },
@@ -857,6 +878,12 @@
           "title":"Phone",
           "type":"string",
           "minLength":1
+        },
+        "description":{
+          "title":"Описание товара",
+          "description":"Введите описание товара",
+          "type":"string",
+          "maxLength": 1000
         },
         "author_first_name":{
           "title":"Author first name",
@@ -986,6 +1013,32 @@
         "password":{
           "title":"Password",
           "type":"string",
+          "minLength":1
+        },
+        "phone":{
+          "title":"\u0422\u0435\u043b\u0435\u0444\u043e\u043d \u0434\u043b\u044f \u0441\u0432\u044f\u0437\u0438",
+          "description":"\u0423\u043a\u0430\u0436\u0438\u0442\u0435 \u0442\u0435\u043b\u0435\u0444\u043e\u043d \u0434\u043b\u044f \u0441\u0432\u044f\u0437\u0438",
+          "type":"string",
+          "maxLength":128,
+          "minLength":1
+        }
+      }
+    },
+    "UserChange":{
+      "type":"object",
+      "properties":{
+        "first_name":{
+          "title":"\u0418\u043c\u044f",
+          "description":"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043c\u044f, \u043c\u0430\u043a\u0441 64 \u0441\u0438\u043c\u0432\u043e\u043b\u0430",
+          "type":"string",
+          "maxLength":64,
+          "minLength":1
+        },
+        "last_name":{
+          "title":"\u0424\u0430\u043c\u0438\u043b\u0438\u044f",
+          "description":"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0444\u0430\u043c\u0438\u043b\u0438\u044e, \u043c\u0430\u043a\u0441 64 \u0441\u0438\u043c\u0432\u043e\u043b\u0430",
+          "type":"string",
+          "maxLength":64,
           "minLength":1
         },
         "phone":{

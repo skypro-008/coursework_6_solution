@@ -34,6 +34,13 @@ class Ad(models.Model):
         verbose_name="Время создания объявления",
         help_text="Введите время создания объявления",
     )
+    description = models.CharField(
+        blank=True,
+        null=True,
+        max_length=1000,
+        verbose_name="Описание товара",
+        help_text="Введите описание товара"
+    )
 
     class Meta:
         verbose_name = "Объявление"
