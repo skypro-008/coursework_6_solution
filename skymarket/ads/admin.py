@@ -10,6 +10,6 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 @admin.register(Ad)
-class CommentAdmin(admin.ModelAdmin):
+class AdAdmin(admin.ModelAdmin):
 
-    list_display = ("pk", "author", "title", "price")
+    list_display = ("pk", "author", "title", "price", "image")
