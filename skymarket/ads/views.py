@@ -27,7 +27,7 @@ class AdViewSet(viewsets.ModelViewSet):
         serializer.save(author=user)
 
     def get_serializer_class(self):
-        if self.action == "retrieve":
+        if self.action in ["retrieve", "create", "update", "partial_update", "destroy"]:
             return AdDetailSerializer
         return AdSerializer
 

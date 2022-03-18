@@ -103,7 +103,7 @@
           "201":{
             "description":"",
             "schema":{
-              "$ref":"#/definitions/Ad"
+              "$ref":"#/definitions/AdDetail"
             }
           }
         },
@@ -371,7 +371,7 @@
           "200":{
             "description":"",
             "schema":{
-              "$ref":"#/definitions/AdPatch"
+              "$ref":"#/definitions/AdDetail"
             }
           }
         },
@@ -805,7 +805,7 @@
           "maxLength":1000,
           "minLength":1
         },
-        "author":{
+        "author_id":{
           "title":"\u0410\u0432\u0442\u043e\u0440 \u043a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u044f",
           "description":"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0430\u0432\u0442\u043e\u0440\u0430 \u043a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u044f",
           "type":"integer"
@@ -894,6 +894,11 @@
           "title":"Author last name",
           "type":"string",
           "readOnly":true
+        },
+        "author_id": {
+          "title": "ID автора комментария",
+          "description": "Укажите автора комментария",
+          "type": "integer"
         }
       }
     },
