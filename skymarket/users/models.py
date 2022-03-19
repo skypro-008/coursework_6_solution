@@ -53,6 +53,11 @@ class User(AbstractBaseUser):
         help_text="Выберите роль пользователя",
     )
 
+    is_active = models.BooleanField(
+        verbose_name="Аккаунт активен",
+        help_text="Укажите, активен ли аккаунт"
+    )
+
     @property
     def is_superuser(self):
         return self.is_admin

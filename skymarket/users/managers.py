@@ -17,6 +17,7 @@ class UserManager(BaseUserManager):
             phone=phone,
             role="user"
         )
+        user.is_active = True
         user.set_password(password)
         user.save(using=self._db)
 

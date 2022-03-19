@@ -9,7 +9,8 @@
       "phone": "+79217777777",
       "role": "user",
       "first_name":"Иван",
-      "last_name": "Иванов"
+      "last_name": "Иванов",
+      "is_active": true
     }
   },
   {
@@ -22,7 +23,8 @@
       "phone": "+79218888888",
       "role": "user",
       "first_name":"Петр",
-      "last_name": "Петров"
+      "last_name": "Петров",
+      "is_active": true
     }
   },
     {
@@ -35,7 +37,8 @@
       "phone": "+7999999999",
       "role": "user",
       "first_name":"Петр",
-      "last_name": "Петров"
+      "last_name": "Петров",
+      "is_active": true
     }
   },
     {
@@ -47,8 +50,9 @@
       "last_login": "2022-02-20 13:34:16.332479+03:00",
       "phone": "+79217777777",
       "role": "user",
-      "first_name":"Петр",
-      "last_name": "Петров"
+      "first_name":"Сергей",
+      "last_name": "Стародубцев",
+      "is_active": true
     }
   },
   {
@@ -61,7 +65,8 @@
       "phone": "+79217777777",
       "role": "admin",
       "first_name": "Админ",
-      "last_name": "Петров"
+      "last_name": "Петров",
+      "is_active": true
     }
   }
 ]
