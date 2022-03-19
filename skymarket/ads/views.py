@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import pagination, viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from ads.models import Ad, Comment
 from ads.permissions import IsOwner, IsAdmin
@@ -18,7 +18,7 @@ class AdViewSet(viewsets.ModelViewSet):
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
     pagination_class = AdPagination
-    permission_classes = [IsAuthenticated]
+    permission_classes = (AllowAny, )
     filter_backends = (DjangoFilterBackend,)
     filterset_class = AdFilter
 
@@ -32,9 +32,10 @@ class AdViewSet(viewsets.ModelViewSet):
         return AdSerializer
 
     def get_permissions(self):
-        if self.action in ["list", "retrieve"]:
+        permission_classes = (AllowAny, )
+        if self.action in ["retrieve"]:
             permission_classes = (IsAuthenticated,)
-        elif self.action in ["create", "update", "partial_update", "destroy"]:
+        elif self.action in ["create", "update", "partial_update", "destroy", "me"]:
             permission_classes = (IsOwner | IsAdmin,)
         return tuple(permission() for permission in permission_classes)
 
