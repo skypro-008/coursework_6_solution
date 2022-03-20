@@ -243,7 +243,7 @@
           "201":{
             "description":"",
             "schema":{
-              "$ref":"#/definitions/CommentPost"
+              "$ref":"#/definitions/Comment"
             }
           }
         },
@@ -296,7 +296,7 @@
           "200":{
             "description":"",
             "schema":{
-              "$ref":"#/definitions/CommentPost"
+              "$ref":"#/definitions/Comment"
             }
           }
         },
@@ -816,6 +816,11 @@
           "type":"string",
           "format":"date-time",
           "readOnly":true
+        },
+        "ad_id":{
+          "title":"Объявление",
+          "description":"Добавьте объявление, которое относится к комментарию",
+          "type":"integer"
         }
       }
     },

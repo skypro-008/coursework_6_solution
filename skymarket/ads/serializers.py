@@ -6,10 +6,11 @@ from ads.models import Ad, Comment
 
 class CommentSerializer(serializers.ModelSerializer):
     author_id = serializers.ReadOnlyField(source="author.id")
+    ad_id = serializers.ReadOnlyField(source="ad.id")
 
     class Meta:
         model = Comment
-        fields = ("pk", "text", "created_at", "author_id")
+        fields = ("pk", "text", "created_at", "author_id", "ad_id")
 
 
 class AdSerializer(serializers.ModelSerializer):
@@ -22,7 +23,7 @@ class AdSerializer(serializers.ModelSerializer):
 class AdDetailSerializer(serializers.ModelSerializer):
     author_first_name = serializers.ReadOnlyField(source="author.first_name")
     author_last_name = serializers.ReadOnlyField(source="author.last_name")
-    phone = serializerfields.PhoneNumberField(source="author.phone")
+    phone = serializerfields.PhoneNumberField(source="author.phone", read_only=True)
     author_id = serializers.ReadOnlyField(source="author.id")
 
     class Meta:

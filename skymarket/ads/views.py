@@ -59,12 +59,20 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
+
+    def perform_create(self, serializer):
+        ad_id = self.kwargs.get("ad_pk")
+        ad_instance = get_object_or_404(Ad, id=ad_id)
+        user = self.request.user
+        serializer.save(author=user, ad=ad_instance)
+
     def get_queryset(self):
         ad_id = self.kwargs.get("ad_pk")
         ad_instance = get_object_or_404(Ad, id=ad_id)
         return ad_instance.comments.all()
 
     def get_permissions(self):
+        permission_classes = (IsAuthenticated,)
         if self.action in ["list", "retrieve"]:
             permission_classes = (IsAuthenticated,)
         elif self.action in ["create", "update", "partial_update", "destroy"]:
