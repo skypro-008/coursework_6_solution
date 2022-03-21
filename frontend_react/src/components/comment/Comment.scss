@@ -1,0 +1,37 @@
+.comment {
+    display: flex;
+    width: 100%;
+    margin-bottom: 12px;
+    justify-content: space-between;
+    align-items: center;
+    &:first-of-type {
+        margin-top: 12px;
+    }
+}
+
+.comment-text {
+    @include inputTitle();
+    color: #fff;
+    text-align: left;
+    margin: 0;
+}
+
+.comment-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.comment-button {
+    width: 8px;
+    height: 8px;
+    background-size: 8px 8px;
+    background-repeat: no-repeat;
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+    &:hover{
+        opacity: 0.3;
+    }
+
+}
