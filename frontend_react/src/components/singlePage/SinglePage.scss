@@ -23,7 +23,7 @@
   background: #6464b9;
   box-shadow: inset 5px 5px 19px #5d5dac, inset -5px -5px 19px #6b6bc6;
   @media screen and (min-width: 801px) and (max-width: 1260px) {
-    width: 70%;
+    width: 80%;
   }
   @media screen and (max-width: 800px) {
     width: 100%;
@@ -59,6 +59,10 @@
   width: 28%;
 }
 
+.box-2 {
+  justify-content: flex-start;
+}
+
 .CardInformation__price {
   width: 30%;
   font-size: 1.2em;
@@ -81,6 +85,7 @@
 .CardInformation__tel {
   color: #fff;
   border-radius: 8px;
+  margin-bottom: 8px;
   @media screen and (max-width: 899px) {
     width: 60%;
     margin: 0;

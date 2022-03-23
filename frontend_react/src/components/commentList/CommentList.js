@@ -14,6 +14,7 @@ function CommentList({ comments, setComments}) {
             commentId={comment.pk}
             userId={comment.author_id}
             setComments={setComments}
+            authorName={comment.author_first_name}
           />
         );
       })}

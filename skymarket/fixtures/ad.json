@@ -15,7 +15,7 @@
     "model": "ads.ad",
     "pk": 2,
     "fields": {
-      "image": null,
+      "image": "images/armchair.jpeg",
       "title": "Шкаф, почти новый",
       "price": 10000,
       "author": 1,
@@ -112,7 +112,7 @@
     "model": "ads.ad",
     "pk": 11,
     "fields": {
-      "image": null,
+      "image": "images/something.jpeg",
       "title": "SkyStation",
       "price": 10000,
       "author": 4,

@@ -35,7 +35,12 @@ function Profile({ user}) {
     let data = await response.json();
 
     if (response.status === 200) {
-      setUserInfo(data);
+      setUserInfo({
+        ...userInfo,
+        first_name: data.first_name.value,
+        last_name: data.last_name.value,
+        phone: data.phone.value,
+      });
       localStorage.setItem("userPers", JSON.stringify(userInfo));
       window.location.reload();
     } else if (response.statusText === "Unauthorized") {
@@ -56,7 +61,6 @@ function Profile({ user}) {
         <label className="userForm__label">
           <h2 className="userForm__subtitle">Имя</h2>
           <input
-            required
             value={values.first_name || ""}
             placeholder={user.first_name}
             title="Имя"
@@ -79,7 +83,6 @@ function Profile({ user}) {
         <label className="userForm__label">
           <h2 className="userForm__subtitle">Фамилия</h2>
           <input
-            required
             value={values.last_name || ""}
             placeholder={user.last_name}
             title="Фамилия"
@@ -103,7 +106,6 @@ function Profile({ user}) {
       <label className="userForm__label">
         <h2 className="userForm__subtitle">Телефон</h2>
         <input
-          required
           value={values.phone || ""}
           placeholder={user.phone}
           title="Телефон"

@@ -10,7 +10,7 @@
   }
   @media screen and (max-width: 599px) {
     width: 90%;
-    padding: 32px 0 80px;
+    padding: 32px 0 30px;
   }
 }
 
@@ -28,7 +28,6 @@
   @include flexColumn();
   width: 100%;
 }
-
 
 .userForm__title {
   @include title();
@@ -57,7 +56,7 @@
   width: 45%;
   @include flexColumn();
   box-sizing: border-box;
-  padding: 0;
+  padding-bottom: 12px;
   @media screen and (min-width: 420px) and (max-width: 620px) {
     width: 48%;
   }
@@ -87,6 +86,12 @@
   line-height: 16px;
   font-weight: 400;
   color: #000;
+}
+
+.userForm__button-main, .userForm__btn-main {
+  @media screen and (min-width: 700px){
+   width: 22% !important;
+  }
 }
 
 .userForm__button {

@@ -19,8 +19,9 @@ function SinglePage() {
   let history = useHistory();
 
   useEffect(() => {
-    getProduct();
-    getComments();
+    setTimeout(() => {
+      Promise.all([getComments(), getProduct()])
+    }, 700)
   }, []);
 
   const getProduct = async () => {
@@ -102,15 +103,15 @@ function SinglePage() {
                 {product.description}
               </p>
             </div>
-            <div className="CardInformation__box">
+            <div className="CardInformation__box box-2">
               <div className="CardInformation__box_second">
                 <p className="CardInformation__tel">{product.phone}</p>
                 <p className="CardInformation__tel">
                   {product.author_first_name}
                 </p>
               </div>
-              <CommentContainer comments={comments} addComment={addComment} setComments={setComments}/>
             </div>
+            <CommentContainer comments={comments} addComment={addComment} setComments={setComments}/>
           </div>
           <EditPopup
             isEditPopupOpen={isEditPopupOpen}

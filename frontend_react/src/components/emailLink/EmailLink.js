@@ -1,47 +1,61 @@
-import React, { useState, useContext } from "react";
-import LinkForm from "../linkForm/LinkForm";
+import React, { useState } from "react";
 import useFormValidation from "../../utils/hooks/useFormValidation";
-import AuthContext from "../../context/AuthContext";
 
 function EmailLink() {
   const [email, setEmail] = useState("");
-  const { values, handleChange, errors, isValid } = useFormValidation();
-  let {sendPassword} = useContext(AuthContext)
+  const { errors } = useFormValidation();
 
-  function handleChangeInput(e) {
-    handleChange(e);
-    if (email.length > 0) {
-      setEmail("");
-    }
+  const handleChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  function heandlerSubmit() {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    const raw = JSON.stringify({
+      email: email,
+    });
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+    fetch("http://127.0.0.1:8000/users/reset_password/", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
   }
+
   return (
-    <LinkForm
-      type="send"
-      buttonName="Отправить"
-      error={!isValid}
-      disabled={!isValid}
-      onSubmit={sendPassword}
-    >
-      <label className="LinkForm__label">
-        <h2 className="LinkForm__subtitlte">Ваш электронный адрес</h2>
-        <input
-          className="LinkForm__input"
-          required
-          value={values.email || ""}
-          name="email"
-          type="email"
-          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-          onChange={handleChangeInput}
-        />
-        <div
-          className={`LinkForm__inputHidden ${
-            errors.email ? "LinkForm__inputError" : ""
-          }`}
-        >
-          {errors.email}
-        </div>
-      </label>
-    </LinkForm>
+    <main className="LinkForm">
+      <form className="LinkForm__form">
+        <label className="LinkForm__label">
+          <h2 className="LinkForm__subtitlte">Ваш электронный адрес</h2>
+          <input
+            className="LinkForm__input"
+            required
+            value={email || ""}
+            name="email"
+            type="email"
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+            onChange={handleChange}
+          />
+          <div
+            className={`LinkForm__inputHidden ${
+              errors.email ? "LinkForm__inputError" : ""
+            }`}
+          >
+            {errors.email}
+          </div>
+        </label>
+      </form>
+      <button className="LinkForm__button " onClick={heandlerSubmit}>
+        Отправить
+      </button>
+      <div className="LinkForm__inputHidden LinkForm__inputError"></div>
+    </main>
   );
 }
 

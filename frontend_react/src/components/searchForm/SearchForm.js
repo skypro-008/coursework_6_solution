@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MediaQuery from "react-responsive";
 
-function SearchForm({ ad, setAd, onFilter }) {
+function SearchForm({ ad, setAd, onChange }) {
   const [validationErrors, setValidationErrors] = useState(""); //state of input validation
 
   function handleChangeProduct(e) {
@@ -15,13 +15,13 @@ function SearchForm({ ad, setAd, onFilter }) {
     }
   }
 
-  function handleFilter() {
-    onFilter(ad);
+  function onFilter() {
+    onChange(ad)
   }
 
   return (
     <section className="SearchForm">
-      <form className="SearchForm__container" onSubmit={handleFilter}>
+      <form className="SearchForm__container" onSubmit={onFilter}>
         <>
           <MediaQuery minWidth={501}>
             <div className="SearchForm__box">

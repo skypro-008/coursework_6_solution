@@ -70,10 +70,11 @@ function Comment(comment, setComments) {
       console.log("error!");
     }
   };
-
+   
   return (
     <>
       <li className="comment" key={comment.pk}>
+        <p className="comment-text comment__author-text">Миша</p>
         <p className="comment-text">{comment.text}</p>
         {userInfo.id === comment.userId ? (
           <Buttons

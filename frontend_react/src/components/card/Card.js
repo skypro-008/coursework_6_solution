@@ -1,7 +1,6 @@
 import React from "react";
 
 function Card(card) {
-
   return (
     <li className="Card" key={card.id}>
         <img src={card.image} className="Card-img" alt="product img" />

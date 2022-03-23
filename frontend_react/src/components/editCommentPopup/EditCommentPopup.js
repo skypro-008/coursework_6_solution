@@ -25,7 +25,7 @@ function EditCommentPopup({isOpen, onClose, getComment, id, editComment}) {
         <UserForm
           id={id}
           onSubmit={editComment}
-          title="Изменить комментарий"
+          title="Изменить"
           buttonText="Изменить"
           errors={!isValid}
           disabled={!isValid}

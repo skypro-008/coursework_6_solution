@@ -3,23 +3,31 @@
     width: 100%;
     margin-bottom: 12px;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     &:first-of-type {
         margin-top: 12px;
     }
 }
 
 .comment-text {
-    @include inputTitle();
-    color: #fff;
+    @include cardDescription();
+    font-size: 0.9em;
     text-align: left;
-    margin: 0;
+    &:last-of-type {
+        @media screen and (max-width: 690px){
+            width: 50%;
+        }
+    }
+}
+
+.comment__author-text {
+    align-self: flex-start;
 }
 
 .comment-buttons {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .comment-button {
@@ -33,5 +41,8 @@
     &:hover{
         opacity: 0.3;
     }
+}
 
+.comment-author {
+    background-color: #fff;
 }

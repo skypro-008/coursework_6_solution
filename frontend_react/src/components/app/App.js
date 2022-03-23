@@ -18,6 +18,7 @@ import ChangePassword from "../changePassword/ChangePassword";
 function App() {
   const [isPopupNavigatorOpen, setIsPopupNavigatorOpen] = useState(false);
   let history = useHistory();
+
   const handleOpenPopup = () => {
     setIsPopupNavigatorOpen(true);
   };

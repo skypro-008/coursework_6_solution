@@ -90,6 +90,7 @@ function EditPopup({ isEditPopupOpen, onClose, id , product}) {
                 className="userForm__input"
                 type="file"
                 onChange={handleImageChange}
+                accept="image/*"
               />
             </label>
           </div>

@@ -9,6 +9,8 @@ function AddCard() {
   const [title, setTitle] = useState(null);
   const [price, setPrice] = useState(null);
   const [description, setDescription] = useState(null);
+  let { setAds, ads } = useContext(MainContext);
+  let { authTokens } = useContext(AuthContext);
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
@@ -25,9 +27,6 @@ function AddCard() {
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
-
-  let { setAds, ads } = useContext(MainContext);
-  let { authTokens } = useContext(AuthContext);
 
   const addCard = async (e) => {
     e.preventDefault();
@@ -77,6 +76,7 @@ function AddCard() {
             className="userForm__input"
             type="file"
             onChange={handleImageChange}
+            accept="image/*"
           />
         </label>
       </div>

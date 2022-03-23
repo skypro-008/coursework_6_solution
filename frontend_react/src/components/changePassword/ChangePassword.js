@@ -1,68 +1,54 @@
-import React, { useState, useContext } from "react";
-import LinkForm from "../linkForm/LinkForm";
-import useFormValidation from "../../utils/hooks/useFormValidation";
-import AuthContext from "../../context/AuthContext";
+import React from "react";
+//import LinkForm from "../linkForm/LinkForm";
 
 function ChangePassword() {
-  const [newPassword, setNewPassword] = useState("");
-  const { values, handleChange, errors, isValid } = useFormValidation();
-  let {resetPassword} = useContext(AuthContext);
+  //const [current_password, setCurrent_password] = useState("");
 
-  function handleChangeInput(e) {
-    handleChange(e);
-    if (newPassword.length > 0) {
-      setNewPassword("");
-    }
-  }
+  
   return (
-    <LinkForm
-      type="submit"
-      buttonName="Сохранить"
-      onSubmit={resetPassword}
-      error={!isValid}
-      disabled={!isValid}
-    >
+    <main className="LinkForm">
+      <form className="LinkForm__form" >
       <label className="LinkForm__label">
         <h2 className="LinkForm__subtitlte">Новый пороль</h2>
         <input
           className="LinkForm__input"
           required
-          value={values.current_password}
+          //value={current_password || ""}
           id="password"
           name="current_password"
           type="password"
           minLength="8"
-          onChange={handleChangeInput}
+          //onChange={handleChangeInput}
         />
         <div
-          className={`LinkForm__inputHidden ${
-            errors.password ? "LinkForm__inputError" : ""
-          }`}
-        >
-          {errors.password}
-        </div>
+          className="LinkForm__inputHidden"
+        />
       </label>
       <label className="LinkForm__label">
         <h2 className="LinkForm__subtitlte">Повторить новый пороль</h2>
         <input
           className="LinkForm__input"
           required
-          value={values.new_password}
+          //value={new_password}
           id="password"
           name="new_password"
           type="password"
           minLength="8"
-          onChange={handleChangeInput}
+          //onChange={handleChangeInput}
         />
         <div
-          className={`LinkForm__inputHidden ${
-            errors.newPassword ? "LinkForm__inputError" : ""
-          }`}
-        >
-          {errors.newPassword}
-        </div>
+          className="LinkForm__inputHidden"
+        />
       </label>
-    </LinkForm>
+      </form>
+      <button
+        className="LinkForm__button"
+        type="submit"
+      >
+        Сохранить
+      </button>
+      <div className="LinkForm__inputHidden LinkForm__inputError"></div>
+    </main>
   );
 }
 
