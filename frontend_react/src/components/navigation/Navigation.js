@@ -33,7 +33,7 @@ function Navigation({ onClose, user }) {
         onClick={onClose}
       >
         <li>
-          <h2 className="navigation__text">Добавить товар</h2>
+          <h2 className="navigation__text">Новое обьявление</h2>
         </li>
       </NavLink>
     </ul>
