@@ -22,7 +22,7 @@ function Main(props) {
 
   useEffect(() => {
     user ? getAllAds() : getAds();
-  }, [page, props.history]);
+  }, [page, props.history, user]);
 
   const getAllAds = async () => {
     const response = await api.get(BASE_URL + `&page=${page}`);
@@ -33,6 +33,10 @@ function Main(props) {
       if (Math.round(response.data.count / 3.2) < page) {
         setPageQty(1);
         props.history.replace("/");
+      } else if (response.status === 500) {
+        console.log("На сервере произошел сбой");
+      } else {
+        console.log(response.status);
       }
     }
   };
@@ -53,8 +57,10 @@ function Main(props) {
         setPage(1);
         props.history.replace("/");
       }
+    } else if (response.status === 500) {
+      console.log("На сервере произошел сбой");
     } else {
-      alert("we found the mistake");
+      console.log(response.status);
     }
   };
 
@@ -68,8 +74,14 @@ function Main(props) {
 
   return (
     <main className="Main">
-      <Promo Pagination={Pagination} PaginationItem={PaginationItem} pageQty={pageQty} page={page} setPage={setPage}/>
-        <Cards ads={filteredAds} />
+      <Promo
+        Pagination={Pagination}
+        PaginationItem={PaginationItem}
+        pageQty={pageQty}
+        page={page}
+        setPage={setPage}
+      />
+      <Cards ads={filteredAds} />
     </main>
   );
 }
