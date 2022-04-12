@@ -9,6 +9,7 @@ class CommentSerializer(serializers.ModelSerializer):
     ad_id = serializers.ReadOnlyField(source="ad.id")
     author_first_name = serializers.ReadOnlyField(source="author.first_name")
     author_last_name = serializers.ReadOnlyField(source="author.last_name")
+    author_image = serializers.ReadOnlyField(source="author.image")
 
     class Meta:
         model = Comment

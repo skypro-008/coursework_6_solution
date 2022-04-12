@@ -1,8 +1,7 @@
-from django.contrib.auth.models import AbstractBaseUser, AbstractUser
+from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
 from users.managers import UserManager
 from phonenumber_field.modelfields import PhoneNumberField
-from django.utils.translation import gettext_lazy as _
 
 
 class UserRoles:
@@ -51,6 +50,14 @@ class User(AbstractBaseUser):
         default=UserRoles.USER,
         verbose_name="Роль пользователя",
         help_text="Выберите роль пользователя",
+    )
+
+    image = models.ImageField(
+        upload_to="photos/",
+        verbose_name="фото",
+        help_text="Разместите Ваше фото",
+        null=True,
+        blank=True,
     )
 
     is_active = models.BooleanField(
