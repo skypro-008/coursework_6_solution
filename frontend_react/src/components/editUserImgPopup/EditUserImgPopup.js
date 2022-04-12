@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import UserForm from "../userForm/UserForm";
-//import useFormValidation from "../../utils/hooks/useFormValidation";
+import useFormValidation from "../../utils/hooks/useFormValidation";
 
-function EditUserImgPopup({ isOpen, onClose}) {
-  //const [image, setImage] = useState(null);
-  //const { handleChange, errors, isValid } = useFormValidation();
+function EditUserImgPopup({ isOpen, onClose, editUserPhoto }) {
+  const [image, setImage] = useState(null);
+  const { handleChange, errors, isValid } = useFormValidation();
 
-  // const handleImageChange = (e) => {
-  //   handleChange(e);
-  //   setImage(e.target.files[0]);
-  // };
-  // console.log(image)
+  const handleImageChange = (e) => {
+    handleChange(e);
+    setImage(e.target.files[0]);
+  };
 
-  // function editUserPhoto(e) {
-  //   e.preventDefault();
-  //   handleEdit(image);
-  // }
+  function handleEdit(e) {
+    e.preventDefault();
+    editUserPhoto(image);
+    setTimeout(() => window.location.reload(), 500)
+  }
 
   return (
     <div className={`popup ${isOpen ? "popup_is-opened" : ""}`}>
@@ -27,9 +27,9 @@ function EditUserImgPopup({ isOpen, onClose}) {
         <UserForm
           title="Изменить"
           className="userForm-editPopup"
-          // onSubmit={editUserPhoto}
+          onSubmit={handleEdit}
           buttonText="Изменить"
-          //errors={!isValid}
+          errors={!isValid}
         >
           <label className="userForm__label userForm__label-comment">
             <h2 className="userForm__subtitle">Фотография</h2>
@@ -39,15 +39,15 @@ function EditUserImgPopup({ isOpen, onClose}) {
               required
               type="file"
               accept="image/*"
-              //onChange={handleImageChange}
+              onChange={handleImageChange}
             />
-            {/* <div
+            <div
               className={`comment__input-hidden ${
-                //errors.title ? "input-error" : ""
-              //}`}
+                errors.title ? "input-error" : ""
+              }`}
             >
               {errors.title}
-            </div> */}
+            </div>
           </label>
         </UserForm>
       </div>
