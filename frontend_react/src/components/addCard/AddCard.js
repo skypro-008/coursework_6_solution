@@ -1,12 +1,9 @@
 import React, { useState, useContext } from "react";
-import axios from "axios";
 import { useLocation } from "react-router-dom";
-import MainContext from "../../context/MainContext";
-import AuthContext from "../../context/AuthContext";
 import UserForm from "../userForm/UserForm";
-// import Preloader from "../preloader/Preloader";
+import Preloader from "../preloader/Preloader";
 
-function AddCard({ id }) {
+function AddCard({ id, handleAddAd, isLoading }) {
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState(null);
   const [price, setPrice] = useState(null);
@@ -17,8 +14,6 @@ function AddCard({ id }) {
     price: null,
     description: null,
   });
-  let { setAds, ads } = useContext(MainContext);
-  let { authTokens } = useContext(AuthContext);
   let location = useLocation().pathname;
 
   const handleImageChange = (e) => {
@@ -61,43 +56,21 @@ function AddCard({ id }) {
     }
   }
 
-  // function addNewAd(e) {
-  //   e.preventDefault();
-  //   debugger
-  //   handleAddAd({ image, title, price, description});
-  // }
-
-  const addCard = async (e) => {
+  function addNewAd(e) {
     e.preventDefault();
-    const url = "http://127.0.0.1:8000/api/ads/";
-    const formData = new FormData();
-    formData.append("image", image);
-    formData.append("title", `${title}`);
-    formData.append("price", `${price}`);
-    formData.append("description", `${description}`);
+    handleAddAd({ image, title, price, description});
+    setTimeout(() => window.location.reload(), 500)
+  }
 
-    const response = await axios.post(url, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-    });
-    let newAd = await response.data;
-
-    if (response.status === 201) {
-      setAds([newAd.data, ...ads]);
-      console.log(newAd);
-      window.location.reload();
-    }
-  };
   return (
+    <>
       <UserForm
         id={`${location === "/newAd" ? "" : id}`}
         title={`${
           location === "/newAd" ? "Добавить новый товар" : "Изменить товар"
         }`}
         buttonText={`${location === "/newAd" ? "Добавать" : "Изменить"}`}
-        onSubmit={addCard}
+        onSubmit={addNewAd}
         errors={
           title === null ||
           image === null ||
@@ -181,6 +154,8 @@ function AddCard({ id }) {
           </label>
         </div>
       </UserForm>
+      {isLoading ? <Preloader /> : ""}
+      </>
   );
 }
 
