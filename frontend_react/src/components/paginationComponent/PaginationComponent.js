@@ -17,7 +17,7 @@ function PaginationComponent({ pageQty, setPage, page }) {
         renderItem={(item) => (
           <PaginationItem
             component={NavLink}
-            to={location === "/profile" ? `/profile/?page=${item.page}` : `/`}
+            to={location === "/profile" ? `/profile` : `/`}
             {...item}
           />
         )}
