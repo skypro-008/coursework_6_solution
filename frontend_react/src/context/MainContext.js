@@ -29,6 +29,13 @@ export const MainContextStates = ({ children }) => {
     return Promise.reject(`Error: ${res.status}`);
   };
 
+  const handleResponseData = (res) => {
+    if (res.ok) {
+      return res.data;
+    }
+    return Promise.reject(`Error: ${res.status}`);
+  };
+
   const handleOpenPopup = () => {
     setIsPopupNavigatorOpen(true);
   };
@@ -69,13 +76,26 @@ export const MainContextStates = ({ children }) => {
       }),
     }).then(handleResponse());
   };
+  const updateUserPhoto = async (image) => {
+    const formData = new FormData();
+    formData.append("image", image);
+    return await axios
+      .patch(`${BASE_URL}/users/me/`, formData, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+      })
+      .then(handleResponse);
+  };
   //comments
   const getComments = async (ad_pk) => {
     return await api.get(`${BASE_URL}/ads/${ad_pk}/comments/`);
   };
 
   const getComment = async (adId, commentId) => {
-    return await api.get(`/ads/${adId}/comments/${commentId}/`);
+    return await api.get(`${BASE_URL}/ads/${adId}/comments/${commentId}/`);
   };
 
   const addComment = async (id, text) => {
@@ -145,22 +165,23 @@ export const MainContextStates = ({ children }) => {
   };
 
   //add new ad
-  const addAd = async (image, title, price, description) => {
-  
+  const addAd = async ({ image, title, price, description }) => {
+    const url = "http://127.0.0.1:8000/api/ads/";
     const formData = new FormData();
     formData.append("image", image);
     formData.append("title", `${title}`);
     formData.append("price", `${price}`);
     formData.append("description", `${description}`);
 
-    return await axios.post(`${BASE_URL}/ads/`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-    })
-    .then(handleResponse);
-  }
+    return await await axios
+      .post(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+      })
+      .then(handleResponseData);
+  };
 
   //edit ad
   const editAdd = async (id, data) => {
@@ -211,6 +232,7 @@ export const MainContextStates = ({ children }) => {
     getUsersAds: getUsersAds,
     getUserInfo: getUserInfo,
     updateUser: updateUser,
+    updateUserPhoto: updateUserPhoto,
     getHiddenAds: getHiddenAds,
     getHiddenAdsTile: getHiddenAdsTile,
     getAds: getAds,
