@@ -14,6 +14,7 @@ function EditPhotoAdPopup({ isOpen, onClose, handleEdit, id }) {
   function editPhotoAdd(e) {
     e.preventDefault();
     handleEdit(image);
+    setTimeout(() => window.location.reload(), 700);
   }
 
   return (
