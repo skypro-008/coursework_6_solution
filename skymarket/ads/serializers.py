@@ -9,11 +9,11 @@ class CommentSerializer(serializers.ModelSerializer):
     ad_id = serializers.ReadOnlyField(source="ad.id")
     author_first_name = serializers.ReadOnlyField(source="author.first_name")
     author_last_name = serializers.ReadOnlyField(source="author.last_name")
-    author_image = serializers.ReadOnlyField(source="author.image")
+    author_image = serializers.ImageField(source="author.image", read_only=True)
 
     class Meta:
         model = Comment
-        fields = ("pk", "text", "created_at", "author_id", "ad_id", "author_first_name", "author_last_name")
+        fields = ("pk", "text", "created_at", "author_id", "ad_id", "author_first_name", "author_last_name", "author_image")
 
 
 class AdSerializer(serializers.ModelSerializer):

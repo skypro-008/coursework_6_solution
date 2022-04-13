@@ -16,6 +16,7 @@ function UserProfile(props) {
     getUsersAds,
     getUserInfo,
     updateUser,
+    updateUserPhoto,
     isUserPhotoPopupOpen,
     handleOpenUserPhotoPopup,
     closePopup,
@@ -58,6 +59,20 @@ function UserProfile(props) {
         console.log("error", error);
       });
   };
+
+  const handleUpdateUserPhoto = (image) => {
+    updateUserPhoto(image)
+      .then((res) => {
+        setUserInfo({
+          ...userInfo,
+          image: res.data.image,
+        });
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  };
+
   return (
     <main className="main">
       <section className="userProfile-grid padding">
@@ -66,7 +81,7 @@ function UserProfile(props) {
             className="profile-avatar"
             style={{
               backgroundImage: `url(${
-                userInfo.img ? userInfo.img : defaultImg
+                userInfo.image ? userInfo.image : defaultImg
               })`,
             }}
           >
@@ -88,7 +103,11 @@ function UserProfile(props) {
         <PaginationComponent pageQty={pageQty} setPage={setPage} page={page} />
       </section>
       {isLoading ? <Preloader /> : <Cards ads={userAds} />}
-      <EditUserImgPopup isOpen={isUserPhotoPopupOpen} onClose={closePopup} />
+      <EditUserImgPopup
+        isOpen={isUserPhotoPopupOpen}
+        onClose={closePopup}
+        editUserPhoto={handleUpdateUserPhoto}
+      />
     </main>
   );
 }

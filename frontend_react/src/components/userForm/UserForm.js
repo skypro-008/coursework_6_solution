@@ -26,8 +26,8 @@ function UserForm(props) {
         {props.children}
         <button
           type="submit"
-          className={`userForm__button userForm__button-text ${
-            props.errors ? "userForm__button_disabled" : location === "/profile" ? "userForm__button-margin" : ""
+          className={`userForm__button userForm__button-text ${ location === "/profile" ? "userForm__button-margin" :
+            props.errors ? "userForm__button_disabled" : ""
           }`}
           disabled={props.disabled}
         >
